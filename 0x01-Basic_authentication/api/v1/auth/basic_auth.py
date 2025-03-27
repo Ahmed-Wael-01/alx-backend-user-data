@@ -51,7 +51,7 @@ class BasicAuth(Auth):
                                      user_pwd: str) -> TypeVar('User'):
         """ returns user from creds
         """
-        if user_email is None or type(user_email) is nor str or\
+        if user_email is None or type(user_email) is not str or\
                 user_pwd is None or type(user_pwd) is not str:
             return None
         try:
