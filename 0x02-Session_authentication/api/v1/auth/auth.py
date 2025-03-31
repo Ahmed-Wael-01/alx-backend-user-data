@@ -17,7 +17,7 @@ class Auth:
             l_item = len(item)
             if l_item is 0:
                 continue
-            if path is item or item == path + '/':
+            if path == item or item == path + '/':
                 return False
             if item[-1] == '*':
                 if item[:-1] == path[:l_item - 1]:
