@@ -45,14 +45,16 @@ class DB:
         result = self._session.query(User).filter_by(**kwords).one()
         return result
 
-    def update_user(self, user_id, **kwords) -> None:
+    def update_user(self, user_id: int, **kwords) -> None:
         """ update users by id
         """
-        try:
-            user = self.find_user_by(id=user_id)
-            for key, val in kwords.items():
-                setattr(user, key, val)
-            self._session.commit()
-        except Exception as e:
-            raise ValueError
+        col_names = User.__table__.columns.keys()
+        for key in kwords.keys():
+            if key not in col_names:
+                raise ValueError
+
+        user = self.find_user_by(id=user_id)
+        for key, val in kwords.items():
+            setattr(user, key, val)
+        self._session.commit()
         return None
