@@ -38,3 +38,9 @@ class DB:
         self._session.add(user)
         self._session.commit()
         return user
+
+    def find_user_by(self, **kwords) -> User:
+        """ finds user by an arbitrary keyword
+        """
+        result = self._session.query(User).filter_by(**kwords).one()
+        return result
