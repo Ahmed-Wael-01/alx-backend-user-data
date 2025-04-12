@@ -62,5 +62,16 @@ def profile():
     abort(403)
 
 
+@app.route("/reset_password", methods=['POST'])
+def get_reset_password_token():
+    """ gets a reset token
+    """
+    try:
+        token = AUTH.get_reset_password_token(request.form['email'])
+    else:
+        abort(403)
+    return jsonify({"email": request.form['email'], "reset_token": token})
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
